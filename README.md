@@ -22,4 +22,6 @@
 ### 機能一覧
 <https://docs.google.com/spreadsheets/d/1w7TifFEI3p-Jfau3v2VOkGV4JzJpcfFcznCCvJ9BX6w/edit?usp=sharing>
 
+※いくつかAPIの連携を考えているのですが、あまり使わない方がいいなどの指定はあるのでしょうか？
+
 
