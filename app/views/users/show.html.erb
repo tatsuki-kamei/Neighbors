@@ -1,3 +1,6 @@
-<% @parents.each do |parent| %>
-<%= parent.name %>
+<%= @user.nickname %>
+<%= @user.introduction %>
+<% @user.user_categories.each do |c| %>
+<%= c.category.name %>
 <% end %>
+
