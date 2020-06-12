@@ -10,12 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_09_072850) do
+ActiveRecord::Schema.define(version: 2020_06_10_085306) do
 
   create_table "categories", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
+  end
+
+  create_table "product_hashtags", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "hashtag_id"
+    t.index ["hashtag_id"], name: "index_product_hashtags_on_hashtag_id"
+    t.index ["product_id"], name: "index_product_hashtags_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -24,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_072850) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category_id"
+    t.string "text"
   end
 
   create_table "relationships", force: :cascade do |t|

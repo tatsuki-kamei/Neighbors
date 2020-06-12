@@ -1,0 +1,4 @@
+<%= @product.name %>
+<%= @product.text %>
+<%= render_with_hashtags(@product.text) %>
+<%= link_to "編集",edit_product_path(@product) %>
