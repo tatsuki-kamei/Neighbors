@@ -69,3 +69,7 @@ gem 'kaminari', '~> 1.1.1'
 gem 'pry-rails'
 gem "select2-rails"
 gem 'ancestry'
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
