@@ -8,6 +8,8 @@ class Product < ApplicationRecord
   has_many :favorites
   has_many :like_users, through: :favorites, source: :user
   has_many :notifications, dependent: :destroy
+  is_impressionable :counter_cache => true, :unique => true
+
 
 
 
