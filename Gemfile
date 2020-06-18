@@ -73,3 +73,4 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+gem 'impressionist', '~>1.6.1'

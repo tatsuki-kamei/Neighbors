@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  impressionist :actions=>[:show,:index]
   def show
   	@product = Product.find(params[:id])
     @comment = Comment.new
