@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def show
   	@product = Product.find(params[:id])
+    @comment = Comment.new
   end
 
   def index
@@ -9,7 +10,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-  	@product = Product.new(product_params) #productモデルのテーブルを使用しているのでproductコントローラで保存する。
+  	@product = current_user.products.new(product_params) #productモデルのテーブルを使用しているのでproductコントローラで保存する。
     if @product.save #入力されたデータをdbに保存する。
       redirect_to product_path(@product), notice: "successfully created product!"#保存された場合の移動先を指定。
   	else

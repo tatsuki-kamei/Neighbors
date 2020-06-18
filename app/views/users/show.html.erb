@@ -1,6 +1,32 @@
-<%= @user.nickname %>
+<%=  attachment_image_tag @product, :image, size: "280x190",format: 'jpeg',fallback: "no_image.jpg"  %>
+<% if @user.nickname.nil? %>
+	<h3>no_name</h3>
+<% else %>
+	<%= @user.nickname %>
+<% end %>
+<%= render partial:"relationships/follow_button", locals: { user: @user }%>
 <%= @user.introduction %>
 <% @user.user_categories.each do |c| %>
 <%= c.category.name %>
 <% end %>
+<% if @user.id == current_user.id %>
+<% else %>
+  <% if @isRoom == true %>
+    <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
+  <% else %>
+    <%= form_for @room do |f| %>
+      <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, :value=> @user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= link_to "設定画面",edit_user_path(@user) , class: "btn btn-success" %>
+<%= link_to destroy_user_session_path, method: :delete do %>
+    <button type="button" class="btn btn-default navbar-btn">
+      <span>ログアウト</span>
+      <!-- destroy_user_session_path -->
+    </button>
+ <% end %>
 

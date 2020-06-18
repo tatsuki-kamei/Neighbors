@@ -1,16 +1,34 @@
 class CommentsController < ApplicationController
-  def create
-    @comment = current_user.comments.new(comment_params)
-    if @comment.save
-      redirect_back(fallback_location: root_path)
-    else
-      redirect_back(fallback_location: root_path)
-    end
 
+  def create
+    @product = Product.find(params[:product_id])
+    comment = current_user.comments.new(comment_params)
+    rate = params[:product_comment][:rate]
+    #product = Product.find_by(id: comment.product_id)
+    #comment.product_id = product.id
+    user_comment = Comment.find_by(user_id: current_user.id, product_id: @product.id)
+    if  user_comment.present?
+      user_comment.update(title: comment.title, messege: comment.messege, rate: rate)
+    else
+      comment.product_id = @product.id
+      comment.rate = rate
+      comment.save(comment_params)
+      @product.create_notification_comment!(current_user, comment.id)
+    end
+    @product.update(rate: @product.comments.average(:rate))
+    redirect_to product_path(@product)
+  end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    @product = comment.product
+    comment.destroy
+    redirect_to product_path(@product)
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:messege)
+      params.require(:comment).permit(:messege, :title, :rate)
   end
+
 end

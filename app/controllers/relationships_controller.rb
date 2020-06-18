@@ -6,10 +6,11 @@ class RelationshipsController < ApplicationController
     following = current_user.follow(@user)
     if following.save
       flash[:success] = 'follow success'
-      redirect_to user
+      @user.create_notification_follow!(current_user)
+      redirect_to @user
     else
       flash.now[:alert] = 'follow failure'
-      redirect_to user
+      redirect_to @user
     end
   end
 
@@ -20,13 +21,13 @@ class RelationshipsController < ApplicationController
       redirect_to @user
     else
       flash.now[:alert] = 'unfollow failure'
-      redirect_to user
+      redirect_to @user
     end
   end
 
   private
   def set_user
-    user = User.find params[:follow_id]
+    @user = User.find(params[:follow_id])
   end
 
 end

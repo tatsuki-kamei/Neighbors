@@ -1,4 +1,21 @@
 <%= @product.name %>
-<%= @product.text %>
+<%= @product.category.name %>
 <%= render_with_hashtags(@product.text) %>
 <%= link_to "編集",edit_product_path(@product) %>
+<%= @product.rate %>
+<%= "口コミ#{@product.comments.count}件" %>
+<div id="star-rate-<%= @product.id %>"></div>
+<%= render "comments/product_comment",product: @product, comment: @comment %>
+<div id="product"><%= render "favorites/favorite", product: @product %></div>
+
+<script>
+$('#star-rate-<%= @product.id %>').raty({
+  size: 36,
+  starOff:  '<%= asset_path('star-off.png') %>',
+  starOn : '<%= asset_path('star-on.png') %>',
+  starHalf: '<%= asset_path('star-half.png') %>',
+  half: true,
+  readOnly: true,
+  score: <%= @product.rate %>,
+});
+</script>

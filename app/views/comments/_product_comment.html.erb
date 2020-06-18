@@ -1,0 +1,117 @@
+<!--コメント欄-->
+<div class="container" style="margin-top: 30px;">
+  <div class="row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10">
+      <table class="table table-hover">
+        <tr class="active row">
+          <th class="col-xs-2">
+            名前
+          </th>
+          <th class="col-xs-2">
+            評価
+          </th>
+          <th class="col-xs-1">
+            タイトル
+          </th>
+          <th>
+            口コミ
+          </th>
+          <td class="col-xs-1"></td>
+        </tr>
+        <% product.comments.each do |product_comment| %>
+        <tr class="row">
+          <td class="col-xs-2">
+            <%= product_comment.user.nickname %>
+          </td>
+          <td class="col-xs-2">
+        <!--星評価-->
+            <div id="star-rate-<%= product_comment.id %>"></div>
+            <script>
+            $('#star-rate-<%= product_comment.id %>').raty({
+              size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              readOnly: true,
+              score: <%= product_comment.rate %>,
+            });
+            </script>
+          </td>
+          <td class="col-xs-1">
+            <%= product_comment.title %>
+          </td>
+          <td>
+            <%= product_comment.messege %>
+          </td>
+          <td class="col-xs-1">
+            <!-- 自分の口コミ削除機能 -->
+            <% if user_signed_in? %>
+              <% if product_comment.user_id == current_user.id %>
+              <%= link_to "削除",comment_path(product_comment.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 40px; ">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10">
+      <%= form_with url:comments_path(product_id: product.id), model: comment, local: true do |f| %>
+
+        <!--商品コードの送信-->
+        <%#= f.hidden_field :product_id, :value => product.id #productはparamsに入れて送ることに%>
+        <%#= f.hidden_field :user_id, :value => current_user.id #userは言わずもがな必要ないと%>
+
+        <!-- タイトル -->
+        <div class="form-group row">
+          <%= f.label :title, 'タイトル ', class:'col-md-3 col-form-label' %>
+          <div class="col-md-9">
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+
+        <!-- 評価 -->
+        <div class="form-group row" id="star">
+          <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+          <%= f.hidden_field :rate, id: :review_star %>
+        </div>
+
+        <!-- 評価javascript -->
+        <script>
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'product_comment[rate]',
+          half: true,
+        });
+        </script>
+
+        <!-- 口コミ -->
+        <div class="form-group row">
+          <%= f.label :messege, '口コミ内容 ', class:'col-md-3 col-form-label' %>
+          <div class="col-md-9">
+            <%= f.text_area :messege, class: "form-control", rows: "8",
+              placeholder:'口コミ内容がなくても、タイトルと評価のみで投稿できます。
+再投稿すれば、前の投稿に上書きされますよ！' %>
+          </div>
+        </div>
+
+        <!-- 確認ボタン -->
+        <div class="form-group row justify-content-end">
+          <div class="col-md-9">
+            <%= f.submit '投稿する', class:"btn btn-success" %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
