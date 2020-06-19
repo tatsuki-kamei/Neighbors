@@ -1,0 +1,31 @@
+<%= form_with model:@question,url: questions_path,method: :post,data: {remote: false} do |f| %>
+	<div class="row">
+				<div>
+					<%= f.label :title %>
+				</div>
+				<div>
+					<%= f.text_field :title, class: "title", :size=>"32" %>
+				</div>
+
+				<div>
+					<%= f.label :text %>
+				</div>
+				<div>
+					<%= f.text_field :text, class: "text", :size=>"32" %>
+				</div>
+
+
+			<div id="answers">
+				<div class="flex" style="padding-bottom:10px;">
+					  <%= f.fields_for :answers do |answer| %>
+			          	<%= render 'answer_fields', f: answer %>
+			          <% end %>
+			          <%= link_to_add_association "選択肢追加", f, :answers %>
+				</div>
+				<div class="col-xs-offset-9 col-xs-3 action">
+			 		<%= f.submit "作成する",class: "btn btn-primary btn-lg" %>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   resources :rooms, :only => [:create, :show, :index]
   resources :favorites, only: [:create, :destroy]
   resources :notifications, only: :index
+  resources :questions do
+    resources :votes, only: [:create, :destroy]
+  end
 end

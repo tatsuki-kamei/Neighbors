@@ -16,9 +16,11 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-// Bootstrap
+//= require jquery3
+//= require popper
 //= require bootstrap-sprockets
 //= require select2
+//= require cocoon
 
 (function($) {
   'use strict';
