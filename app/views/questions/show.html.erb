@@ -1,0 +1,11 @@
+<%= @question.title %>
+<%= @question.text %>
+
+<%= form_with model:@vote,url:question_votes_path(question_id: @question.id),method: :post,local: true do |f| %>
+	<% @answers.each do |answer| %>
+		<%= f.radio_button :answer_id, answer.id %> <span style="font-weight:300;"><%= answer.text %></span>
+	<% end %>
+<div align="center">
+	<%= f.submit "投票する" ,class: "btn btn-primary" %>
+</div>
+<% end %>
