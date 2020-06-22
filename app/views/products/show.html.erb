@@ -5,7 +5,6 @@
 <%= @product.rate %>
 <%= @product.impressionist_count(:filter=>:ip_address) %>
 <%= "口コミ#{@product.comments.count}件" %>
-<div id="star-rate-<%= @product.id %>"></div>
 <%= render "comments/product_comment",product: @product, comment: @comment %>
 <div id="product"><%= render "favorites/favorite", product: @product %></div>
 
