@@ -1,32 +1,107 @@
-<%=  attachment_image_tag @product, :image, size: "280x190",format: 'jpeg',fallback: "no_image.jpg"  %>
-<% if @user.nickname.nil? %>
-	<h3>no_name</h3>
-<% else %>
-	<%= @user.nickname %>
-<% end %>
-<%= render partial:"relationships/follow_button", locals: { user: @user }%>
-<%= @user.introduction %>
-<% @user.user_categories.each do |c| %>
-<%= c.category.name %>
-<% end %>
-<% if @user.id == current_user.id %>
-<% else %>
-  <% if @isRoom == true %>
-    <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
-  <% else %>
-    <%= form_for @room do |f| %>
-      <%= fields_for @entry do |e| %>
-        <%= e.hidden_field :user_id, :value=> @user.id %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3">
+      <span class="img"><%=  attachment_image_tag @user, :image, size: "150x150",format: 'jpeg',fallback: "no_image.jpg"  %></span>
+    </div>
+    <div class="col-md-4">
+      <div class="flex_box">
+        <div>
+          <% if @user.nickname.nil? %>
+          	<h3>no_name</h3>
+          <% else %>
+          	<h3><%= @user.nickname %></h3>
+          <% end %>
+        </div>
+        <div>
+          <%= render partial:"relationships/follow_button", locals: { user: @user }%>
+        </div>
+      </div>
+      <div>
+        <%= "#{@user.followings.count}フォロー|" %>
+        <%= "#{@user.followers.count}フォロワー|" %>
+        <%= "#{@user.favorites.count}いいね" %>
+      </div>
+      <br>
+      <div>
+        <%= @user.introduction %>
+        <% @user.user_categories.each do |c| %>
+          <%= c.category.name %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div>
+        <% unless @user.id == current_user.id %>
+          <% if @isRoom == true %>
+            <p><a href="/rooms/<%= @roomId %>">チャットへ</a></p>
+          <% else %>
+            <%= form_for @room do |f| %>
+              <%= fields_for @entry do |e| %>
+                <%= e.hidden_field :user_id, :value=> @user.id %>
+              <% end %>
+              <%= f.submit "チャットを始める" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <br>
+      <div>
+        <%= link_to "設定画面",edit_user_path(@user) , class: "btn btn-success" %>
+      </div>
+      <br>
+      <div>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+            <button type="button" class="btn btn-default navbar-btn">
+              <span>ログアウト</span>
+            </button>
+         <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a href="#tab1" class="nav-link active" data-toggle="tab">クチコミ</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab2" class="nav-link" data-toggle="tab">コメント</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab3" class="nav-link" data-toggle="tab">アンケート</a>
+        </li>
+        <li class="nav-item">
+          <a href="#tab4" class="nav-link" data-toggle="tab">タブ4</a>
+        </li>
+      </ul>
+    </div>
+  <div class="col-md-4">
+  </div>
+  </div>
+  <div class="tab-content">
+    <div id="tab1" class="tab-pane active"> <!-- ここの中身を入れ替える -->
+      <% @user.favorites.each do |favorite| %>
+        <%= favorite.product %>
       <% end %>
-      <%= f.submit "チャットを始める" %>
-    <% end %>
-  <% end %>
-<% end %>
-<%= link_to "設定画面",edit_user_path(@user) , class: "btn btn-success" %>
-<%= link_to destroy_user_session_path, method: :delete do %>
-    <button type="button" class="btn btn-default navbar-btn">
-      <span>ログアウト</span>
-      <!-- destroy_user_session_path -->
-    </button>
- <% end %>
+      a
+    </div>
+    <div id="tab2" class="tab-pane"> <!-- ここの中身を入れ替える -->
+      <% @user.comments.each do |comment| %>
+        <%= comment.product %>
+      <% end %>
+      v
+    </div>
+    <div id="tab3" class="tab-pane"> <!-- ここの中身を入れ替える -->
+      <% @user.votes.each do |vote| %>
+        <%= vote.question %>
+      <% end %>
+    </div>
+    <div id="tab4" class="tab-pane"> <!-- ここの中身を入れ替える -->
+      <h2 class="border_brown">滝</h2>
+    </div>
+  </div>
+
+
 

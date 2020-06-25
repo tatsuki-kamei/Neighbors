@@ -14,3 +14,19 @@
  *= require_self
  */
   @import "bootstrap";
+
+
+.flex_box {
+display: flex;
+}
+.flex > div {
+padding: auto 0;
+}
+
+.top_main {
+background-image: image-url("food_top.jpg");
+height: 190px;
+background-size:cover;
+}
+
+

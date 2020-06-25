@@ -1,6 +1,6 @@
 <head>
   <script>
-    $(document).ready(function() { 
+    $(document).ready(function() {
         $( ".sample_select2" ).select2({
           width: 600,
           multiple: true
@@ -9,41 +9,40 @@
   </script>
 </head>
 <%= form_with model:@user,url: user_path,method: :patch,data: {remote: false} do |f| %>
-	<div class="row">
-		<div class="col-xs-4">
-			<%= attachment_image_tag @user, :image, size: "280x190",format: 'jpeg',fallback: "no_image.jpg"  %><br>
-			<%= f.attachment_field :image, class: "image btn-lg" %>
-		<div style="height:100px">
-		</div>
-		</div>
-
-		<div class="flex" style="padding-bottom:10px;">
-				<div style="padding-right:63px;">
-					<%= f.label :nickname %>
-				</div>
-				<div>
-					<%= f.text_field :nickname, class: "name", :size=>"32" %>
-				</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-4">
+				<%= attachment_image_tag @user, :image, size: "120x120",format: 'jpeg',fallback: "no_image.jpg"  %><br>
+				<%= f.attachment_field :image, class: "image btn-lg" %>
 			</div>
 
-
-			<div class="flex" style="padding-bottom:10px;">
-				  <div class="field">
-				    <%= f.label :category %>
-				    <%= f.select :category, Category.all.map{|t| [t.name, t.id]}, { include_hidden: false }, { class: 'sample_select2', multiple: true } %>
-				  </div>
-			</div>
-
-			<div class="flex" style="padding-bottom:10px;">
-				<div style="padding-right:63px;">
-					<%= f.label :introduction %>
+			<div class=col-xs-4>
+				<div class="flex" style="padding-bottom:10px;">
+					<div style="padding-right:63px;">
+						<%= f.label :nickname %>
+					</div>
+					<div>
+						<%= f.text_field :nickname, class: "name", :size=>"32" %>
+					</div>
 				</div>
-				<div>
-					<%= f.text_area :introduction, class: "introduction" %>
+
+
+				<div  style="padding-bottom:10px;">
+					    <%= f.label :category %><br>
+					    <%= f.select :category, Category.all.map{|t| [t.name, t.id]}, { include_hidden: false }, { class: 'sample_select2', multiple: true } %>
 				</div>
-			</div>
-			<div class="col-xs-offset-9 col-xs-3 action">
-		 		<%= f.submit "変更を保存",class: "btn btn-primary btn-lg" %>
+
+				<div class="flex" style="padding-bottom:10px;">
+					<div style="padding-right:63px;">
+						<%= f.label :introduction %>
+					</div>
+					<div>
+						<%= f.text_area :introduction, class: "introduction" %>
+					</div>
+				</div>
+				<div class="col-xs-offset-9 col-xs-3 action">
+			 		<%= f.submit "変更を保存",class: "btn btn-primary btn-lg" %>
+				</div>
 			</div>
 		</div>
 	</div>

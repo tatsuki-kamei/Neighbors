@@ -4,8 +4,8 @@
 <%= link_to "編集",edit_product_path(@product) %>
 <%= @product.rate %>
 <%= @product.impressionist_count(:filter=>:ip_address) %>
-<%= "口コミ#{@product.comments.count}件" %>
 <div id="star-rate-<%= @product.id %>"></div>
+<%= "口コミ#{@product.comments.count}件" %>
 <%= render "comments/product_comment",product: @product, comment: @comment %>
 <div id="product"><%= render "favorites/favorite", product: @product %></div>
 
