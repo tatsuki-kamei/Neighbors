@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_06_25_023055) do
 
   create_table "answers", force: :cascade do |t|
-    t.integer "question_id"
+    t.integer "question_id", null: false
     t.string "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -186,9 +186,9 @@ ActiveRecord::Schema.define(version: 2020_06_25_023055) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "question_id"
-    t.integer "answer_id"
+    t.integer "user_id", null: false
+    t.integer "question_id", null: false
+    t.integer "answer_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["answer_id"], name: "index_votes_on_answer_id"
