@@ -1,13 +1,3 @@
-<head>
-  <script>
-    $(document).ready(function() {
-        $( ".sample_select2" ).select2({
-          width: 600,
-          multiple: true
-        });
-      });
-  </script>
-</head>
 <%= form_with model:@user,url: user_path,method: :patch,data: {remote: false} do |f| %>
 	<div class="container">
 		<div class="row">
@@ -27,9 +17,10 @@
 				</div>
 
 
-				<div  style="padding-bottom:10px;">
+				<div style="padding-bottom:10px;">
 					    <%= f.label :category %><br>
-					    <%= f.select :category, Category.all.map{|t| [t.name, t.id]}, { include_hidden: false }, { class: 'sample_select2', multiple: true } %>
+					    <%= f.select :category, Category.all.map{|t| [t.name, t.id]}, { include_hidden: false }, { class: 'mySelect2', multiple: true } %>
+
 				</div>
 
 				<div class="flex" style="padding-bottom:10px;">

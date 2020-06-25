@@ -1,2 +1,39 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+  	<h1 class="display-4">Neighbors-friends</h1>
+    <p class="lead">美味しいや楽しいを共有しましょう</p>
+  </div><!-- /.container -->
+</div><!-- /.jumbotron -->
+<div class="container">
+	<div class= "row">
+		<div class="col-md-8 flex_box">
+			<div class="contain_menu">
+				<%#= link_to "評価ランキング", product_rank_path, class: 'btn btn-danger' %>
+			</div>
+		</div>
+		<div class="col-md-4 flex_box">
+			<div class="category_menu">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<% @users.each do |user| %>
+			<div class="col-sm-6 col-md-4" style="margin-bottom:10px">
+			    <div class="card img-thumbnail">
+			    	<div class="mx-auto">
+		      			<span class="img"><%=  attachment_image_tag user, :image, size: "150x150",format: 'jpeg',fallback: "no_image.jpg"  %></span>
+		      		</div>
+				    <div class="card-body px-2 py-3">
+				        <span class="card-title" style="font-size:20px;"><%= user.nickname %></span>
+				        <span class="float-right" style="font-size:12px;"><%#= "好きなジャンル#{user.categories.count}件" %></span>
+				        <p class="card-text"><%= user.introduction %></p>
+				        <span class="mb-0">
+				        	<%= link_to "詳細を見る", user_path(user),class: "btn btn-primary btn-sm float-right"; %>
+				        </span>
+
+				    </div><!-- /.card-body -->
+			    </div><!-- /.card -->
+			</div>
+		<% end %>
+	</div>
+</div>

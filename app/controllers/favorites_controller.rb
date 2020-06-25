@@ -15,6 +15,8 @@ class FavoritesController < ApplicationController
 	def destroy
 	    @product = Favorite.find(params[:id]).product
 	    if @product.like?(current_user)
+	    	notification = Notification.find_by(visitor_id: current_user.id, visited_id: @product.user_id, product_id: @product.id, action: "favorite")
+	    	notification.destroy
 	      @product.unlike(current_user)
 	      @product.reload
 	      respond_to do |format|

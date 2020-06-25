@@ -1,31 +1,31 @@
 <%= form_with model:@question,url: questions_path,method: :post,data: {remote: false} do |f| %>
-	<div class="row">
-				<div>
-					<%= f.label :title %>
-				</div>
-				<div>
-					<%= f.text_field :title, class: "title", :size=>"32" %>
-				</div>
-
-				<div>
-					<%= f.label :text %>
-				</div>
-				<div>
-					<%= f.text_field :text, class: "text", :size=>"32" %>
+	<div class="container">
+		<div class="row col-md-6">
+				<div class="cp_iptxt">
+					<%= f.text_field :title, class: "ef", placeholder:"" %>
+					<label>質問</label>
+					<span class="focus_line"><i></i></span>
 				</div>
 
-
-			<div id="answers">
-				<div class="flex" style="padding-bottom:10px;">
-					  <%= f.fields_for :answers do |answer| %>
-			          	<%= render 'answer_fields', f: answer %>
-			          <% end %>
-			          <%= link_to_add_association "選択肢追加", f, :answers %>
+				<div class="cp_iptxt">
+					<%= f.text_area :text, class: "ef", placeholder:"" %>
+					<label>説明</label>
 				</div>
-				<div class="col-xs-offset-9 col-xs-3 action">
-			 		<%= f.submit "作成する",class: "btn btn-primary btn-lg" %>
+				<br>
+				<div>
+					<div id="answers">
+						<%= f.label :answers,"選択肢" %>
+						<div style="padding-bottom:10px;">
+							  <%= f.fields_for :answers do |answer| %>
+					          	<%= render 'answer_fields', f: answer %>
+					          <% end %>
+					          <%= link_to_add_association "選択肢追加", f, :answers %>
+						</div>
+					</div>
 				</div>
-			</div>
+				<div class="action">
+				 	<%= f.submit "作成する",class: "btn btn-primary btn-lg" %>
+				</div>
 		</div>
 	</div>
 <% end %>

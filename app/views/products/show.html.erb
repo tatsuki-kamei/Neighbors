@@ -1,16 +1,107 @@
-<%= @product.name %>
-<%= @product.category.name %>
-<%= render_with_hashtags(@product.text) %>
-<%= link_to "編集",edit_product_path(@product) %>
-<%= @product.rate %>
-<%= @product.impressionist_count(:filter=>:ip_address) %>
-<div id="star-rate-<%= @product.id %>"></div>
-<%= "口コミ#{@product.comments.count}件" %>
-<%= render "comments/product_comment",product: @product, comment: @comment %>
-<div id="product"><%= render "favorites/favorite", product: @product %></div>
+<div class="container">
+	<div class="contain-bottom profile">
+		<div class="row border-bottom" style="margin-bottom:10px">
+			<div class="col-md-11">
+				<%= link_to "#{@product.category.name}", product_path %>
+				<h2><%= @product.name %></h2>
+			</div>
+			<div class="float-right">
+				<div id="product"><%= render "favorites/favorite", product: @product %></div>
+				<div>
+					<%= link_to "編集",edit_product_path(@product) %>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<span class="img"><%=  attachment_image_tag @product, :image, size: "300x225",format: 'jpeg',fallback: "no_image.jpg"  %></span>
+			</div>
+			<div class="col-md-8">
+				<div class="flex_box">
+					<div class="star-rate-<%= @product.id %>">
+					</div>
+					<div>
+						<%= @product.rate %>
+					</div>
+					<div>
+						<%= "(#{@product.comments.count}件)" %>
+					</div>
+				</div>
+				<div class="side-bar"><span style="font-size:18px; ">クチコミ詳細</div>
+				<div>
+					<table class="table table-hover" style="table-layout:fixed;">
+				        <tr>
+				          <th style="width:100px;">
+				            <span class="table-font ">名前</span>
+				          </th>
+				          <th class="col-md-2">
+				            <span class="table-font"><%= @product.name %></span>
+				          </th>
+				        </tr>
+				        <tr>
+				          <th style="width:30px;">
+				            <span class="table-font">ハッシュタグ</span>
+				          </th>
+				          <th class="col-md-2">
+				            <span class="table-font"><%= @product.hashtags.count %></span>
+				          </th>
+				        </tr>
+				        <tr>
+				          <th style="width:30px;">
+				            <span class="table-font">説明</span>
+				          </th>
+				          <th class="col-md-7">
+				          	<span class="table-font"><%= render_with_hashtags(@product.text) %></span>
+				          </th>
+				        </tr>
+				    </table>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin:10px 0px">
+			<div class="col-md-1"></div>
+			<div class="col-md-4 btn btn-success">
+				<span class="table-font ">
+					<%= link_to "#{@product.user.nickname}さんの他の投稿も確認する",user_path(@product.user) %>
+				</span>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="col-md-4 btn btn-success">
+				<span class="table-font">
+					<%= link_to "#{@product.category.name}の他の投稿も確認する",product_category_path(@product.category) %>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="contain_top">
+		<div class="row">
+		    <div class="col-md-12">
+		      <ul class="nav nav-tabs">
+		        <li class="nav-item col-md-6 mx-auto">
+		          <a href="#tab1" class="nav-link active" data-toggle="tab">クチコミ一覧</a>
+		        </li>
+		        <li class="nav-item col-md-6">
+		          <a href="#tab2" class="nav-link" data-toggle="tab">クチコミ投稿</a>
+		        </li>
+		      </ul>
+			</div>
+		</div>
+		<div class="tab-content border">
+		    <div id="tab1" class="tab-pane active row" style="background-color:#F5F5F5;"> <!-- ここの中身を入れ替える -->
+		    	<div class="col-md-1"></div>
+		    	<div class="col-md-10">
+			    	<%= render "comments/product_comment",product: @product %>
+			    </div>
+		    </div>
+		    <div id="tab2" class="tab-pane row"> <!-- ここの中身を入れ替える -->
+		    	<%= render "comments/product_new",product: @product, comment: @comment %>
+		    </div>
+		</div>
+	</div>
+</div>
 
 <script>
-$('#star-rate-<%= @product.id %>').raty({
+$('.star-rate-<%= @product.id %>').raty({
   size: 36,
   starOff:  '<%= asset_path('star-off.png') %>',
   starOn : '<%= asset_path('star-on.png') %>',

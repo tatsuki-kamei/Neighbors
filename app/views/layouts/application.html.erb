@@ -12,11 +12,10 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   </head>
-
   <body style="padding-top:4.5rem;">
-    <if user_signed_in?>
+    <% if user_signed_in? %>
     <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md">
-      <a class="navbar-brand" href="#">ブランド</a>
+      <a class="navbar-brand" href="#">Neighbors</a>
       <form class="form-inline my-2 my-lg-0">
         <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
@@ -26,35 +25,66 @@
       </button>
 
       <div class="collapse navbar-collapse justify-content-end" id="Navber">
-        <ul class="navbar-nav ml-auto　nav nav-tabs">
+        <ul class="navbar-nav ml-auto　nav nav-tab">
           <li class="nav-item active">
-            <a class="nav-link" href="#">通知 <span class="sr-only"></span></a>
+            <%= link_to "通知", notifications_path, class: "nav-link"; %>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">アンケート</a>
+            <%= link_to "投票", questions_path, class: "nav-link"; %>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">DM</a>
+            <%= link_to "クチコミ", products_path, class: "nav-link"; %>
           </li>
-          <li class="nav-item dropdown　active">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              ドロップダウン
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-              <a class="dropdown-item" href="#">マイページ</a>
+          <li class="nav-item active dropdown-menu-left">
+            <div class="dropdown">
+              <i class="fa fa-user-circle nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-hidden="true" aria-expanded="true"></i>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+              <%= link_to "マイページ",user_path(current_user),class: "dropdown-item"; %>
               <a class="dropdown-item" href="#">マイクリップ</a>
-              <a class="dropdown-item" href="#">ログアウト</a>
-              <a class="dropdown-item" href="#">設定</a>
+              <%= link_to "ログアウト",destroy_user_session_path, method: :delete, class: "dropdown-item"; %>
+              <%= link_to "設定画面",edit_user_path(current_user) , class: "dropdown-item"; %>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">その他</a>
+              </div>
             </div>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">無効</a>
+          <li class="nav-item active">
+            <%= link_to "マイページ", user_path(current_user), class: "nav-link"; %>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </nav>
+    <%# if unchecked_notifications.any? %>
+        <!-- <i class="fa fa-circle" style="color: gold;"></i> -->
+    <% else %>
+      <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md">
+      <a class="navbar-brand" href="#">Neighbors</a>
+      <form class="form-inline my-2 my-lg-0">
+        <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
+        <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
+      </form>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="Navber">
+        <ul class="navbar-nav ml-auto　nav nav-tab">
+          <li class="nav-item active">
+            <%= link_to "投票", questions_path, class: "nav-link"; %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "クチコミ", products_path, class: "nav-link"; %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "ログイン", new_user_session_path(current_user), class: "nav-link"; %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "新規登録", new_user_registration_path, class: "nav-link"; %>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <% end %>
     <%= yield %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -2,14 +2,14 @@
     <% if product.like?(current_user) %>
       <%= form_for(product.favorites.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
         <%= button_tag(class: "btn btn-default btn-xs") do %>
-          <%= content_tag :span, "#{product.favorites.count}", class: "glyphicon glyphicon-heart" %>
+          <i class="fa fa-heart" style="color: royalblue;" aria-hidden="true"></i><%= content_tag :span, "#{product.favorites.count}" %>
         <% end %>
       <% end %>
     <% else %>
       <%= form_for(product.favorites.build, remote: true) do |f| %>
         <div><%= hidden_field_tag :product_id, product.id %></div>
         <%= button_tag(class: "btn btn-default btn-xs") do %>
-          <%= content_tag :span, "#{product.favorites.count}", class: "glyphicon glyphicon-heart-empty" %>
+          <i class="fa fa-heart" style="color: royalblue;" aria-hidden="true"></i><%= content_tag :span, "#{product.favorites.count}" %>
         <% end %>
       <% end %>
     <% end %>

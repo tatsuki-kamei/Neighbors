@@ -75,3 +75,5 @@ group :production do
 end
 gem 'impressionist', '~>1.6.1'
 gem "cocoon"
+gem 'font-awesome-sass', '~> 5.4.1'
+gem 'chartkick'

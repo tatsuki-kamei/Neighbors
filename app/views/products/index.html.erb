@@ -1,22 +1,28 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+  	<h1 class="display-4">Neighbors-reviwers</h1>
+    <p class="lead">美味しいや楽しいを共有しましょう</p>
+  </div><!-- /.container -->
+</div><!-- /.jumbotron -->
 <div class="container">
-	<div class= "row">
-		<div class="col-md-12 top_main">
-			<img class="mx-auto d-block top-image" src="food_top.jpg">
-		</div>
-	</div>
 	<div class= "row">
 		<div class="col-md-8 flex_box">
 			<div class="contain_menu">
-				<%= link_to "評価ランキング", products_path, class: 'btn btn-danger' %>
+				<%= link_to "評価ランキング", product_rank_path, class: 'btn btn-danger' %>
 			</div>
 			<div class="contain_menu">
-				<%= link_to "評価ランキング", products_path, class: 'btn btn-danger' %>
+				<!-- 切り替えボタンの設定 -->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#categoryModal">
+				  カテゴリー
+				</button>
 			</div>
 			<div class="contain_menu">
-				<%= link_to "評価ランキング", products_path, class: 'btn btn-danger' %>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#hashtagModal">
+				  ハッシュタグ
+				</button>
 			</div>
 			<div class="contain_menu">
-				<%= link_to "評価ランキング", products_path, class: 'btn btn-danger' %>
+				<%= link_to "新規作成",new_product_path, class: 'btn btn-danger' %>
 			</div>
 		</div>
 		<div class="col-md-4 flex_box">
@@ -24,5 +30,69 @@
 			</div>
 		</div>
 	</div>
-</div>
-<%= link_to "新規作成",new_product_path %>
+	<div class="row">
+		<% @products.each do |product| %>
+			<% if product.rate == nil %>
+				<% product.rate = 0 %>
+			<% end %>
+			<div class="col-sm-6 col-md-4" style="margin-bottom:10px">
+			    <div class="card img-thumbnail">
+			    	<div class="mx-auto">
+		      			<span class="img"><%=  attachment_image_tag product, :image, size: "150x150",format: 'jpeg',fallback: "no_image.jpg"  %></span>
+		      		</div>
+				    <div class="card-body px-2 py-3">
+				        <span class="card-title" style="font-size:20px;"><%= product.name %></span>
+				        <span class="float-right" style="font-size:12px;"><%= "閲覧数#{product.impressionist_count(:filter=>:ip_address)}件" %></span>
+				        <p class="card-text"><%= render_with_hashtags(product.text) %></p>
+				        <%= render "products/raty",product: product %>
+				        <span class="mb-0">
+				        	<%= link_to "詳細を見る", product_path(product),class: "btn btn-primary btn-sm float-right"; %>
+				        </span>
+
+				    </div><!-- /.card-body -->
+			    </div><!-- /.card -->
+			</div>
+		<% end %>
+	</div>
+
+<!-- モーダルの設定 -->
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalLabel">カテゴリー一覧</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<% @parents.each do |parent| %>
+		  <h5><%= link_to "#{parent.name}",products_path %></h5>
+		<% end %>
+	</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal fade" id="hashtagModal" tabindex="-1" role="dialog" aria-labelledby="hashtagModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="hashtagModalLabel">ハッシュタグ一覧</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<% @hashtags.each do |hashtag| %>
+		  <h5><%= link_to "#{hashtag.hashname}",hashtag_path(name: hashtag.hashname) %></h5>
+		<% end %>
+	</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
