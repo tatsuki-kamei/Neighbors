@@ -11,15 +11,26 @@
 // about supported directives.
 //
 //= require jquery
+//= require turbolinks
+//= require select2-full
 //= require rails-ujs
 //= require activestorage
 //= require bootstrap
 //= require_tree .
-//= require jquery3
 //= require popper
-//= require select2
 //= require cocoon
-//= require turbolinks
+//= require chartkick
+//= require Chart.bundle
+
+$(function () {
+  $('.popover-test').popover()
+  $('.tooltip-test').tooltip()
+})
+
+$(document).ready(function() {
+      $('.mySelect2').select2();
+      console.log('.mySelect2')
+});
 
 (function($) {
   'use strict';

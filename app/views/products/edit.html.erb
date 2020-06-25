@@ -1,13 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div style="width:150px; text-align: center; margin-left:60px">
+			<h4 style="background-color: #EEEEEEEE">クチコミ編集</h4>
+		</div>
+		<div style="height:80px">
+		</div>
+	</div>
 <%= form_with model:@product,url: product_path,method: :patch,data: {remote: false} do |f| %>
 	<div class="row">
 		<div class="col-xs-4">
 			<%= attachment_image_tag @product, :image, size: "280x190",format: 'jpeg',fallback: "no_image.jpg"  %><br>
 			<%= f.attachment_field :image, class: "image btn-lg" %>
-		<div style="height:100px">
-		</div>
 		</div>
 
-		<div class="flex" style="padding-bottom:10px;">
+		<div class=col-xs-4>
+			<div style="padding-bottom:10px;">
 				<div style="padding-right:63px;">
 					<%= f.label :name%>
 				</div>
@@ -16,9 +23,17 @@
 				</div>
 			</div>
 
+			<div style="padding-bottom:10px;">
+				<div style="padding-right:50px;">
+					<%= f.label :text %>
+				</div>
+				<div>
+					<%= f.text_area :text, class: "text" %>
+				</div>
+			</div>
+
 			<div class="col-xs-offset-9 col-xs-3 action">
-		 		<%= f.submit "内容更新",class: "btn btn-primary btn-lg" %>
+		 		<%= f.submit "編集完了",class: "btn btn-primary btn-lg" %>
 			</div>
 		</div>
-	</div>
 <% end %>

@@ -1,11 +1,40 @@
-<%= @question.title %>
-<%= @question.text %>
+<% vote={} %>
+<div class="container">
+	<h2><%= @question.title %></h2>
+	<div><mark ><i><%= @question.text %></i></mark></div>
 
-<%= form_with model:@vote,url:question_votes_path(question_id: @question.id),method: :post,local: true do |f| %>
-	<% @answers.each do |answer| %>
-		<%= f.radio_button :answer_id, answer.id %> <span style="font-weight:300;"><%= answer.text %></span>
+	<%= form_with model:@vote,url:question_votes_path(question_id: @question.id),method: :post,local: true do |f| %>
+		<div class="cp_ipradio">
+		<% @answers.each do |answer| %>
+			<ul>
+					<%= f.radio_button :answer_id, answer.id %> <%= answer.text %>
+					<% if answer.votes.count != 0 %>
+						<% vote[answer.text] = (answer.votes.count*100.0/@question.votes.count).round %>
+					<% else %>
+						<% vote[answer.text] = 0 %>
+					<% end %>
+			</ul>
+		<% end %>
+	<div align="center">
+		<%= f.submit "投票する" ,class: "btn btn-success" %>
+	</div>
 	<% end %>
-<div align="center">
-	<%= f.submit "投票する" ,class: "btn btn-primary" %>
+	<% vote = vote.sort_by{ |_, v| -v }.to_h %>
+
+	<div class="contain_top">
+		<div class="row">
+			<% unless @question.votes.count == 0 %>
+				<div class="col-md-5">
+					<%= pie_chart @chart.group(:text).count %>
+				</div>
+				<div class="col-md-7">
+					<h3><%= "#{@question.title}" %></h3>
+					<% vote.each.with_index(1) do |(key, value), i| %>
+							<div><%= "・#{key}の投票率は#{value}%で現在#{i}位" %><br><div>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
 </div>
-<% end %>
+

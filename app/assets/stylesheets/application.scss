@@ -10,11 +10,13 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require select2
  *= require_self
+ *= require select2-bootstrap
+ *= require_tree
  */
   @import "bootstrap";
-
+  @import 'font-awesome-sprockets';
+  @import 'font-awesome';
 
 .flex_box {
 display: flex;
@@ -29,4 +31,255 @@ height: 190px;
 background-size:cover;
 }
 
+.left-message{
+  text-align: left;
+}
+
+.right-message{
+  text-align: right;
+}
+
+.jumbotron {
+  background-image: image-url("food_top.jpg");
+  background-size: cover;
+  background-position: center 60%;
+  height: 250px;
+  align: center;
+}
+
+.contain_menu {
+	padding: 0px 20px 20px 0px;
+}
+
+.profile {
+ position: relative;
+ margin: 2px auto;
+ padding: 1.2em;
+ width: 100%;
+ color: #555555;
+ background-color: #fff;
+ border: 2px solid #8FBC8F;
+ box-shadow: 2px 2px 1px #ccc;
+}
+.profile_text {
+ position: absolute;
+ padding: 0 .5em;
+ left: 20px;
+ top: -15px;
+ font-weight: bold;
+ background-color: #fff;
+ color: #8FBC8F;
+}
+
+.side-bar{
+  border-left: 2px solid #8FBC8F;
+}
+
+.table-font{
+  font-size: 12px
+}
+
+.contain_top{
+padding:10px;
+margin-top:10px;
+border-top-width: 2px;
+border-top-color: $gray-300;
+border-top-style: solid;
+}
+
+$bgDefault      : #49042c;
+$bgHighlight    : #1572f0;
+$colDefault     : #1f9fbf;
+$colHighlight   : #f1eef4;
+$dropDown       : false;
+.navbar {
+  background-color: $bgDefault;
+  .navbar-brand {
+    color: $colDefault;
+    &:hover, &:focus {
+      color: $colHighlight; }}
+  .navbar-text {
+    color: $colDefault;
+    a {
+      color: $colHighlight;
+      &:hover, &:focus {
+        color: $colHighlight; }}}
+  .navbar-nav {
+    .nav-link {
+      color: $colDefault;
+      border-radius: .25rem;
+      margin: 0 0.25em;
+      &:not(.disabled) {
+        &:hover, &:focus {
+          color: $colHighlight; }}}
+    @if ($dropDown) {
+      .dropdown-menu {
+        background-color: $bgDefault;
+        border-color: $bgHighlight;
+        .dropdown-item {
+          color: $colDefault;
+          &:hover, &:focus, &.active {
+            color: $colHighlight;
+            background-color: $bgHighlight; }}
+        .dropdown-divider {
+          border-top-color: $bgHighlight; }}}
+    .nav-item.active, .nav-item.show {
+      .nav-link, .nav-link:hover, .nav-link:focus {
+        color: $colDefault; }}}
+  .navbar-toggle {
+    border-color: $bgHighlight;
+    &:hover, &:focus {
+      background-color: $bgHighlight; }
+    .navbar-toggler-icon {
+      color: $colDefault; }}
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $colDefault; }
+  .navbar-link {
+    color: $colDefault;
+    &:hover {
+      color: $colHighlight; }}}
+@media (max-width: 575px) {
+  .navbar-expend-sm .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight; }}}
+@media (max-width: 767px) {
+  .navbar-expend-md .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight; }}}
+@media (max-width: 991px) {
+  .navbar-expend-lg .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight; }}}
+@media (max-width: 1199px) {
+  .navbar-expend-xl .navbar-nav .show .dropdown-menu {
+    .dropdown-item {
+      color: $colDefault;
+      &:hover, &:focus {
+        color: $colHighlight; }}
+    .dropdown-item.active {
+      color: $colHighlight;
+      background-color: $bgHighlight; }}}
+.navbar-expend .navbar-nav .show .dropdown-menu {
+  .dropdown-item {
+    color: $colDefault;
+    &:hover, &:focus {
+      color: $colHighlight; }}
+  .dropdown-item.active {
+    color: $colHighlight;
+    background-color: $bgHighlight; }}
+
+.cp_iptxt {
+  position: relative;
+  width: 80%;
+  margin: 40px 0%;
+}
+.cp_iptxt input[type='text'] {
+  font: 15px/24px sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  letter-spacing: 1px;
+  padding-left: 4em;
+}
+.cp_iptxt input[type='text']:focus {
+  outline: none;
+}
+.ef {
+  padding: 7px 14px;
+  transition: 0.4s;
+  border: 1px solid #1b2538;
+  background: transparent;
+}
+.ef ~ .focus_line:before,
+.ef ~ .focus_line:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  content: '';
+  transition: 0.3s;
+  background-color: #da3c41;
+}
+.ef ~ .focus_line:after {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: auto;
+}
+.ef ~ .focus_line i:before,
+.ef ~ .focus_line i:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  content: '';
+  transition: 0.4s;
+  background-color: #da3c41;
+}
+.ef ~ .focus_line i:after {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: auto;
+}
+.ef:focus ~ .focus_line:before,
+.ef:focus ~ .focus_line:after,
+.cp_iptxt.ef ~ .focus_line:before,
+.cp_iptxt.ef ~ .focus_line:after {
+  width: 100%;
+  transition: 0.3s;
+}
+.ef:focus ~ .focus_line i:before,
+.ef:focus ~ .focus_line i:after,
+.cp_iptxt.ef ~ .focus_line i:before,
+.cp_iptxt.ef ~ .focus_line i:after {
+  height: 100%;
+  transition: 0.4s;
+}
+.ef ~ label {
+  position: absolute;
+  z-index: -1;
+  top: 10px;
+  left: 14px;
+  width: 100%;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+  color: #aaaaaa;
+}
+.ef:focus ~ label,
+.cp_iptxt.ef ~ label {
+  font-size: 12px;
+  top: -18px;
+  left: 0;
+  transition: 0.3s;
+  color: #da3c41;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle 400px at center,
+    #57f6fe 0%,
+    #30c7ec 50%,
+    #46aef7 100%
+  );
+}
 

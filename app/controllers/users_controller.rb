@@ -5,8 +5,8 @@ class UsersController < ApplicationController
 		@parents = Category.where(ancestry: nil)
 		@currentUserEntry=Entry.where(user_id: current_user.id)
 	    @userEntry=Entry.where(user_id: @user.id)
-	    if @user.id == current_user.id
-	    else
+	    @chart = @user.products
+	    unless @user.id == current_user.id
 	      @currentUserEntry.each do |cu|
 	        @userEntry.each do |u|
 	          if cu.room_id == u.room_id then
@@ -39,6 +39,10 @@ class UsersController < ApplicationController
 		end
 		user.update(user_params)
 		redirect_to user_path(user)
+	end
+
+	def index
+		@users = User.all
 	end
 
 	private

@@ -1,1 +1,42 @@
-<%= link_to "新規作成",new_question_path %>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+  	<h1 class="display-4">Neighbors-votes</h1>
+    <p class="lead">美味しいや楽しいを共有しましょう</p>
+  </div><!-- /.container -->
+</div><!-- /.jumbotron -->
+<div class="container">
+	<div class= "row">
+		<div class="col-md-8 flex_box">
+			<div class="contain_menu">
+				<%= link_to "評価ランキング", question_rank_path, class: 'btn btn-danger' %>
+			</div>
+			<div class="contain_menu">
+				<%= link_to "新規作成",new_question_path, class: 'btn btn-danger' %>
+			</div>
+		</div>
+		<div class="col-md-4 flex_box">
+			<div class="category_menu">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<% @questions.each do |question| %>
+			<div class="col-sm-6 col-md-4" style="margin-bottom:10px">
+			    <div class="card img-thumbnail">
+			    	<div class="mx-auto">
+		      			<span class="img"><%#=  attachment_image_tag question.user, :image, size: "150x150",format: 'jpeg',fallback: "no_image.jpg"  %></span>
+		      		</div>
+				    <div class="card-body px-2 py-3">
+				        <span class="card-title" style="font-size:20px;"><%= question.title %></span>
+				        <span class="float-right" style="font-size:12px;"><%= "閲覧数#{question.impressionist_count(:filter=>:ip_address)}件" %></span>
+				        <p class="card-text"><%= question.text %></p>
+				        <span class="mb-0">
+				        	<%= link_to "詳細を見る", question_path(question),class: "btn btn-primary btn-sm float-right"; %>
+				        </span>
+
+				    </div><!-- /.card-body -->
+			    </div><!-- /.card -->
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -1,13 +1,24 @@
 class ProductsController < ApplicationController
   impressionist :actions=>[:show,:index]
+
+  def rank
+    @products = Product.find(Product.group(:id).order('rate desc').pluck(:id))
+    @product = Product.new
+    @parents = Category.where(ancestry: nil)
+    @hashtags = Hashtag.all
+    render 'index'
+  end
+
   def show
   	@product = Product.find(params[:id])
     @comment = Comment.new
   end
 
   def index
-  	@products = Product.all #一覧表示するためにproductモデルの情報を全てくださいのall
+  	@products = Product.all.order(created_at: :desc) #一覧表示するためにproductモデルの情報を全てくださいのall
     @product = Product.new
+    @parents = Category.where(ancestry: nil)
+    @hashtags = Hashtag.all
   end
 
   def create
@@ -34,7 +45,7 @@ class ProductsController < ApplicationController
   def update
   	@product = Product.find(params[:id])
   	if @product.update(product_params)
-  		redirect_to @product, notice: "successfully updated product!"
+  		redirect_to product_path(@product), notice: "successfully updated product!"
   	else #if文でエラー発生時と正常時のリンク先を枝分かれにしている。
   		render "edit"
   	end
@@ -52,6 +63,10 @@ class ProductsController < ApplicationController
     @user = current_user
     @tag = Hashtag.find_by(hashname: params[:name])
     @products = @tag.product_hashtags
+  end
+
+  def category
+    @category = Category.find(id: params[:category_id])
   end
 
   private
