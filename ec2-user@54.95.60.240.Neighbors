@@ -1,4 +1,0 @@
-DB_USERNAME=root
-DB_PASSWORD=aknsifaASIDkkmkn453
-DB_HOST=rds-mysql-server.cb1fbb1ity9s.ap-northeast-1.rds.amazonaws.com
-DB_DATABASE=Neighbors
