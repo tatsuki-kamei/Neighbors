@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 	impressionist :actions=>[:show]
+	before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
 	def index
 		@questions = Question.all.order(created_at: :desc)

@@ -2,7 +2,7 @@
 	<div class="contain-bottom profile">
 		<div class="row border-bottom" style="margin-bottom:10px">
 			<div class="col-md-11">
-				<%= link_to "#{@product.category.name}", product_path %>
+				<%= link_to "#{@product.category.name}", product_category_path(name: @product.category.name) %>
 				<h2><%= @product.name %></h2>
 			</div>
 			<div class="float-right">
@@ -68,7 +68,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-4 btn btn-success">
 				<span class="table-font">
-					<%= link_to "#{@product.category.name}の他の投稿も確認する",product_category_path(@product.category) %>
+					<%= link_to "#{@product.category.name}の他の投稿も確認する",product_category_path(name: @product.category.name) %>
 				</span>
 			</div>
 		</div>
@@ -94,7 +94,11 @@
 			    </div>
 		    </div>
 		    <div id="tab2" class="tab-pane row"> <!-- ここの中身を入れ替える -->
-		    	<%= render "comments/product_new",product: @product, comment: @comment %>
+		    	<% if user_signed_in? %>
+		    		<%= render "comments/product_new",product: @product, comment: @comment %>
+		    	<% else %>
+		    	ログインしている方のみコメントできます。
+		    	<% end %>
 		    </div>
 		</div>
 	</div>

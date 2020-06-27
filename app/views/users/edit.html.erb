@@ -17,11 +17,17 @@
 				</div>
 
 
-				<div style="padding-bottom:10px;">
-					    <%= f.label :category %><br>
-					    <%= f.select :category, Category.all.map{|t| [t.name, t.id]}, { include_hidden: false }, { class: 'mySelect2', multiple: true } %>
-
-				</div>
+				<%= f.fields_for :user_categories do |a| %>
+					<%= a.hidden_field :user_id, :value => @user.id %>
+					<div style="padding-bottom:10px;">
+						<div style="padding-right:50px;">
+							<%= a.label :category%>
+						</div>
+						<div>
+							<%= a.collection_select :category_id, @parents, :id, :name, :prompt => "--選択して下さい--"  %>
+						</div>
+					</div>
+				<% end %>
 
 				<div class="flex" style="padding-bottom:10px;">
 					<div style="padding-right:63px;">

@@ -16,7 +16,9 @@
 			</ul>
 		<% end %>
 	<div align="center">
-		<%= f.submit "投票する" ,class: "btn btn-success" %>
+		<% if user_signed_in? %>
+			<%= f.submit "投票する" ,class: "btn btn-success" %>
+		<% end %>
 	</div>
 	<% end %>
 	<% vote = vote.sort_by{ |_, v| -v }.to_h %>

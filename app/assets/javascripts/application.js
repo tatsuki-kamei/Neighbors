@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require turbolinks
-//= require select2-full
 //= require rails-ujs
 //= require activestorage
 //= require bootstrap
@@ -25,11 +24,6 @@
 $(function () {
   $('.popover-test').popover()
   $('.tooltip-test').tooltip()
-})
-
-$(document).ready(function() {
-      $('.mySelect2').select2();
-      console.log('.mySelect2')
 });
 
 (function($) {

@@ -16,10 +16,10 @@
     <% if user_signed_in? %>
     <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md">
       <a class="navbar-brand" href="#">Neighbors</a>
-      <form class="form-inline my-2 my-lg-0">
+<!--       <form class="form-inline my-2 my-lg-0">
         <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-      </form>
+      </form> -->
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -40,11 +40,10 @@
               <i class="fa fa-user-circle nav-link dropdown-toggle" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-hidden="true" aria-expanded="true"></i>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
               <%= link_to "マイページ",user_path(current_user),class: "dropdown-item"; %>
-              <a class="dropdown-item" href="#">マイクリップ</a>
-              <%= link_to "ログアウト",destroy_user_session_path, method: :delete, class: "dropdown-item"; %>
+              <!-- <a class="dropdown-item" href="#">マイクリップ</a> -->
               <%= link_to "設定画面",edit_user_path(current_user) , class: "dropdown-item"; %>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">その他</a>
+              <%= link_to "ログアウト",destroy_user_session_path, method: :delete, class: "dropdown-item"; %>
               </div>
             </div>
           </li>
@@ -59,10 +58,10 @@
     <% else %>
       <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md">
       <a class="navbar-brand" href="#">Neighbors</a>
-      <form class="form-inline my-2 my-lg-0">
+<!--       <form class="form-inline my-2 my-lg-0">
         <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>
-      </form>
+      </form> -->
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -76,7 +75,7 @@
             <%= link_to "クチコミ", products_path, class: "nav-link"; %>
           </li>
           <li class="nav-item active">
-            <%= link_to "ログイン", new_user_session_path(current_user), class: "nav-link"; %>
+            <%= link_to "ログイン", new_user_session_path, class: "nav-link"; %>
           </li>
           <li class="nav-item active">
             <%= link_to "新規登録", new_user_registration_path, class: "nav-link"; %>
@@ -86,6 +85,12 @@
     </nav>
     <% end %>
     <%= yield %>
+
+    <footer class="footer mt-auto mb-auto" style="background-color: #808080;">
+        <div class="container">
+          <span style ="font-size:10px; color:#FFFFFF;">Copyright (C) 2020 Tatsuki Kamei All Rights Reserved. 「掲載内容は私自身の見解であり、所属する組織を代表するものではありません。」</p>
+        </div>
+      </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

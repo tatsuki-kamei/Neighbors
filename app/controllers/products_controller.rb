@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update]
   impressionist :actions=>[:show,:index]
 
   def rank
@@ -37,7 +38,7 @@ class ProductsController < ApplicationController
 
   def new
   	@product = Product.new
-  	@categories = Category.all
+  	@categories = Category.where(ancestry: nil)
   end
 
 
@@ -66,7 +67,7 @@ class ProductsController < ApplicationController
   end
 
   def category
-    @category = Category.find(id: params[:category_id])
+    @category = Category.find_by(name: (params[:name]))
   end
 
   private

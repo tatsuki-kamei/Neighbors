@@ -18,8 +18,14 @@
           <div>
             <%= product_comment.user.nickname %>
           </div>
-          <div></div>
         </div>
+          <div class="float-right">
+            <% if user_signed_in? %>
+              <% if product_comment.user_id == current_user.id %>
+                <%= link_to "削除",comment_path(product_comment.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %>
+                <% end %>
+              <% end %>
+          </div>
       </div>
     </div>
         <script>
@@ -35,11 +41,4 @@
         </script>
       </td>
         <!-- 自分の口コミ削除機能 -->
-        <% if user_signed_in? %>
-          <% if product_comment.user_id == current_user.id %>
-            <%= link_to "削除",comment_path(product_comment.id), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger float-right" %>
-            <% end %>
-          <% end %>
         <% end %>
-      </td>
-    </tr>

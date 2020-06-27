@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+  before_action :authenticate_user!
 	def create
     @question = Question.find(params[:question_id])
     answer = Answer.find(params[:answer_id])

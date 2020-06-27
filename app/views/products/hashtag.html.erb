@@ -4,7 +4,7 @@
 <div class="row">
 	<% @products.each do |product| %>
 		<% if product.product.rate == nil %>
-			<% product.rate = 0 %>
+			<% product.product.rate = 0 %>
 		<% end %>
 		<div class="col-sm-6 col-md-4" style="margin-bottom:10px">
 		    <div class="card img-thumbnail">

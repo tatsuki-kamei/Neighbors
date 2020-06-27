@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!
+	before_action :forbid_test_user, {only: [:edit,:update,:destroy]}
 	def show
 		@user = User.find(params[:id])
 		@parents = Category.where(ancestry: nil)
@@ -25,18 +26,16 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
-		@user.user_categories.build
+		if @user = current_user
+			@user.user_categories.build
+			@parents = Category.where(ancestry: nil)
+		else
+			redirect_to user_path(@user)
+		end
 	end
 
 	def update
 		user = User.find(params[:id])
-		if params[:user][:category] != nil
-			params[:user][:category].each do |category|
-				unless UserCategory.exists?(user_id:current_user.id,category_id: category)
-					UserCategory.create(user_id:current_user.id,category_id: category)
-				end
-			end
-		end
 		user.update(user_params)
 		redirect_to user_path(user)
 	end
@@ -49,5 +48,12 @@ class UsersController < ApplicationController
 
 	def user_params
 		params.require(:user).permit(:nickname, :introduction, :image, user_categories_attributes:[:id,:user_id,:category_id])
+	end
+
+	def forbid_test_user
+	  if params[:email] == "test@example.com"
+	    flash[:notice] = "テストユーザーのため変更できません"
+	    redirect_to root_path
+	  end
 	end
 end

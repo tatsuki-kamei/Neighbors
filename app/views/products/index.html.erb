@@ -54,6 +54,7 @@
 			</div>
 		<% end %>
 	</div>
+</div>
 
 <!-- モーダルの設定 -->
 <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel">
@@ -67,7 +68,7 @@
       </div>
       <div class="modal-body">
       	<% @parents.each do |parent| %>
-		  <h5><%= link_to "#{parent.name}",products_path %></h5>
+		  <h5><%= link_to "#{parent.name}",product_category_path(name: parent.name) %></h5>
 		<% end %>
 	</div>
       <div class="modal-footer">

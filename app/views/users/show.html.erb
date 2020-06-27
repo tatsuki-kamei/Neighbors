@@ -53,7 +53,11 @@
         </div>
         <br>
         <div>
-          <%= link_to "設定画面",edit_user_path(@user) , class: "btn btn-success" %>
+          <% if @user = current_user %>
+            <% unless @user.email == "test@example.com" %>
+              <%= link_to "設定画面",edit_user_path(@user) , class: "btn btn-success" %>
+            <% end %>
+          <% end %>
         </div>
         <br>
         <div>
@@ -67,13 +71,13 @@
       <div class="col-md-12">
         <ul class="nav nav-tabs">
           <li class="nav-item mx-auto">
-            <a href="#tab1" class="nav-link active" data-toggle="tab">クチコミ投稿</a>
+            <a href="#tab1" class="nav-link active" data-toggle="tab"><%= "クチコミ投稿(#{@user.products.count})" %></a>
           </li>
           <li class="nav-item mx-auto">
-            <a href="#tab2" class="nav-link" data-toggle="tab">コメント投稿</a>
+            <a href="#tab2" class="nav-link" data-toggle="tab"><%= "コメント投稿(#{@user.comments.count})" %></a>
           </li>
           <li class="nav-item mx-auto">
-            <a href="#tab3" class="nav-link" data-toggle="tab">アンケート回答</a>
+            <a href="#tab3" class="nav-link" data-toggle="tab"><%= "アンケート回答(#{@user.votes.count})" %></a>
           </li>
         </ul>
       </div>
