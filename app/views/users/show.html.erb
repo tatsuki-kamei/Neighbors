@@ -97,6 +97,9 @@
               <tr>
                 <td class="border-left"><%= link_to "#{product.name}", product_path(product),data: {"turbolinks"=>false} %></td>
                 <td><%= link_to "#{product.category.name}", product_path,data: {"turbolinks"=>false} %></td>
+                <% unless product.rate != nil %>
+                <% product.rate = 0 %>
+                <% end %>
                 <td class="border-right"><%= link_to "#{product.rate}", product_path(product),data: {"turbolinks"=>false} %></td>
               </tr>
             </tbody>

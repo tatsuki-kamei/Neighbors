@@ -18,6 +18,7 @@
 	</div>
 	<div class="row">
 		<% @users.each do |user| %>
+			<% unless user.email == "test@example.com" %>
 			<div class="col-sm-6 col-md-4" style="margin-bottom:10px">
 			    <div class="card img-thumbnail">
 			    	<div class="mx-auto">
@@ -34,6 +35,7 @@
 				    </div><!-- /.card-body -->
 			    </div><!-- /.card -->
 			</div>
+			<% end %>
 		<% end %>
 	</div>
 	<%= paginate @users %>

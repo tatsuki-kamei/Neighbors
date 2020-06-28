@@ -54,7 +54,7 @@
 			</div>
 		<% end %>
 	</div>
-	<% if @rank != nil %>
+	<% if @rank == nil %>
 		<%= paginate @products %>
 	<% end %>
 </div>

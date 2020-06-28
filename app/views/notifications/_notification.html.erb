@@ -1,7 +1,7 @@
 <% visiter = notification.visitor %>
 <% item = notification.product %>
 
-<% unless visiter = current_user %>
+<% unless visiter == current_user %>
 	<div class="user-view clearfix ">
 		<%= link_to user_path(notification.visitor) do %>
 			<%= attachment_image_tag visiter, :image, format: "jpeg", fallback: "no_image.jpg", size: "50x50", class:"profile-img-circle" %>
