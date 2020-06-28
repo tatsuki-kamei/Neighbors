@@ -8,7 +8,7 @@
 	<div class= "row">
 		<div class="col-md-8 flex_box">
 			<div class="contain_menu">
-				<%= link_to "評価ランキング", product_rank_path, class: 'btn btn-danger' %>
+				<%= link_to "評価ランキング", product_rank_path, class: 'btn btn-danger',data: {"turbolinks"=>false} %>
 			</div>
 			<div class="contain_menu">
 				<!-- 切り替えボタンの設定 -->
@@ -46,7 +46,7 @@
 				        <p class="card-text"><%= render_with_hashtags(product.text) %></p>
 				        <%= render "products/raty",product: product %>
 				        <span class="mb-0">
-				        	<%= link_to "詳細を見る", product_path(product),class: "btn btn-primary btn-sm float-right"; %>
+				        	<%= link_to "詳細を見る", product_path(product),class: "btn btn-primary btn-sm float-right",data: {"turbolinks"=>false} %>
 				        </span>
 
 				    </div><!-- /.card-body -->
@@ -54,6 +54,9 @@
 			</div>
 		<% end %>
 	</div>
+	<% if @rank != nil %>
+		<%= paginate @products %>
+	<% end %>
 </div>
 
 <!-- モーダルの設定 -->
@@ -68,7 +71,7 @@
       </div>
       <div class="modal-body">
       	<% @parents.each do |parent| %>
-		  <h5><%= link_to "#{parent.name}",product_category_path(name: parent.name) %></h5>
+		  <h5><%= link_to "#{parent.name}",product_category_path(name: parent.name),data: {"turbolinks"=>false} %></h5>
 		<% end %>
 	</div>
       <div class="modal-footer">
@@ -88,7 +91,7 @@
       </div>
       <div class="modal-body">
       	<% @hashtags.each do |hashtag| %>
-		  <h5><%= link_to "#{hashtag.hashname}",hashtag_path(name: hashtag.hashname) %></h5>
+		  <h5><%= link_to "#{hashtag.hashname}",hashtag_path(name: hashtag.hashname),data: {"turbolinks"=>false} %></h5>
 		<% end %>
 	</div>
       <div class="modal-footer">

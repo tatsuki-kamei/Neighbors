@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
   impressionist :actions=>[:show,:index]
 
   def rank
-    @products = Product.find(Product.group(:id).order('rate desc').pluck(:id))
+    @products = Product.find(Product.group(:id).order('rate desc').limit(3).pluck(:id))
+    @rank == 0
     @product = Product.new
     @parents = Category.where(ancestry: nil)
     @hashtags = Hashtag.all
@@ -16,7 +17,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-  	@products = Product.all.order(created_at: :desc) #一覧表示するためにproductモデルの情報を全てくださいのall
+  	@products = Product.all.order(created_at: :desc).page(params[:page]).per(6) #一覧表示するためにproductモデルの情報を全てくださいのall
     @product = Product.new
     @parents = Category.where(ancestry: nil)
     @hashtags = Hashtag.all

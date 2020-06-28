@@ -16,7 +16,7 @@
   <body style="padding-top:4.5rem;">
     <% if user_signed_in? %>
     <nav class="navbar navbar-light bg-light fixed-top navbar-expand-md">
-      <a class="navbar-brand" href="#">Neighbors</a>
+      <%= link_to "Neighbors",tops_top_path,class: "navbar-brand" %>
 <!--       <form class="form-inline my-2 my-lg-0">
         <input type="search" class="form-control mr-sm-2" placeholder="検索..." aria-label="検索...">
         <button type="submit" class="btn btn-outline-success my-2 my-sm-0">検索</button>

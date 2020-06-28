@@ -2,7 +2,7 @@
 	<div class="contain-bottom profile">
 		<div class="row border-bottom" style="margin-bottom:10px">
 			<div class="col-md-11">
-				<%= link_to "#{@product.category.name}", product_category_path(name: @product.category.name) %>
+				<%= link_to "#{@product.category.name}", product_category_path(name: @product.category.name),data: {"turbolinks"=>false} %>
 				<h2><%= @product.name %></h2>
 			</div>
 			<div class="float-right">
@@ -68,7 +68,7 @@
 			<div class="col-md-2"></div>
 			<div class="col-md-4 btn btn-success">
 				<span class="table-font">
-					<%= link_to "#{@product.category.name}の他の投稿も確認する",product_category_path(name: @product.category.name) %>
+					<%= link_to "#{@product.category.name}の他の投稿も確認する",product_category_path(name: @product.category.name),data: {"turbolinks"=>false} %>
 				</span>
 			</div>
 		</div>

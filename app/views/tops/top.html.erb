@@ -1,0 +1,12 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+  	<h1 class="display-4">Neighbors</h1>
+    <p class="lead">美味しいや楽しいを共有しましょう</p>
+  </div><!-- /.container -->
+</div>
+<div>
+	<% unless user_signed_in? %>
+  		<%= link_to "Log in",new_user_session_path %>
+  	<% end %>
+</div>
+</div>

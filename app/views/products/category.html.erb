@@ -1,4 +1,4 @@
-<%= link_to "クチコミ一覧に戻る",products_path %>
+<%= link_to "クチコミ一覧に戻る",products_path,data: {"turbolinks"=>false} %>
 <h3 class="text-center">#<%= "#{@category.name}" %></h3>
     <hr>
 <div class="row">
@@ -17,7 +17,7 @@
 			        <p class="card-text"><%= render_with_hashtags(product.text) %></p>
 			        <%= render "products/raty",product: product %>
 			        <span class="mb-0">
-			        	<%= link_to "詳細を見る", product_path(product),class: "btn btn-primary btn-sm float-right"; %>
+			        	<%= link_to "詳細を見る", product_path(product),class: "btn btn-primary btn-sm float-right",data: {"turbolinks"=>false} %>
 			        </span>
 
 			    </div><!-- /.card-body -->

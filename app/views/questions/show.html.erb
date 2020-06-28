@@ -5,21 +5,22 @@
 
 	<%= form_with model:@vote,url:question_votes_path(question_id: @question.id),method: :post,local: true do |f| %>
 		<div class="cp_ipradio">
-		<% @answers.each do |answer| %>
-			<ul>
-					<%= f.radio_button :answer_id, answer.id %> <%= answer.text %>
-					<% if answer.votes.count != 0 %>
-						<% vote[answer.text] = (answer.votes.count*100.0/@question.votes.count).round %>
-					<% else %>
-						<% vote[answer.text] = 0 %>
-					<% end %>
-			</ul>
-		<% end %>
-	<div align="center">
-		<% if user_signed_in? %>
-			<%= f.submit "投票する" ,class: "btn btn-success" %>
-		<% end %>
-	</div>
+			<% @answers.each do |answer| %>
+				<ul>
+						<%= f.radio_button :answer_id, answer.id %> <%= answer.text %>
+						<% if answer.votes.count != 0 %>
+							<% vote[answer.text] = (answer.votes.count*100.0/@question.votes.count).round %>
+						<% else %>
+							<% vote[answer.text] = 0 %>
+						<% end %>
+				</ul>
+			<% end %>
+			<div align="center">
+				<% if user_signed_in? %>
+					<%= f.submit "投票する" ,class: "btn btn-success" %>
+				<% end %>
+			</div>
+		</div>
 	<% end %>
 	<% vote = vote.sort_by{ |_, v| -v }.to_h %>
 
@@ -32,7 +33,7 @@
 				<div class="col-md-7">
 					<h3><%= "#{@question.title}" %></h3>
 					<% vote.each.with_index(1) do |(key, value), i| %>
-							<div><%= "・#{key}の投票率は#{value}%で現在#{i}位" %><br><div>
+							<div><%= "・#{key}の投票率は#{value}%で現在#{i}位" %><br></div>
 					<% end %>
 				</div>
 			<% end %>

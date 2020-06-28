@@ -21,4 +21,6 @@ Rails.application.routes.draw do
     resources :votes, only: [:create, :destroy]
   end
   get 'question/rank' => "questions#rank"
+  get "/" => "tops#top"
+  get "tops/top" => "tops#top"
 end
