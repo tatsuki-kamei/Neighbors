@@ -2,9 +2,9 @@
   <div>
     <h2 class="side-bar"><%= product_comment.title %></h2>
   </div>
-    <div class="flex_box">
+    <div class="flex_box border-bottom">
       <div class="col-md-4">
-        a
+        <span class="img"><%=  attachment_image_tag product_comment.user, :image, size: "200x150",format: 'jpeg',fallback: "no_image.jpg"  %></span>
       </div>
       <div class="col-md-5">
         <div>
@@ -13,10 +13,9 @@
         <div id="star-rate-<%= product_comment.id %>"></div>
         <div class="flex_box">
           <div>
-            <span class="img"><%=  attachment_image_tag product_comment.user, :image, size: "30x30",format: 'jpeg',fallback: "no_image.jpg"  %></span>
           </div>
           <div>
-            <%= product_comment.user.nickname %>
+            <%= link_to "#{product_comment.user.nickname}",user_path(product_comment.user) %>
           </div>
         </div>
           <div class="float-right">

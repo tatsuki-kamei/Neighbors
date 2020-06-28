@@ -53,7 +53,7 @@
         </div>
         <br>
         <div>
-          <% if @user = current_user %>
+          <% if @user == current_user %>
             <% unless @user.email == "test@example.com" %>
               <%= link_to "設定画面",edit_user_path(@user) , class: "btn btn-success" %>
             <% end %>
@@ -92,12 +92,12 @@
               <th scope="col" class="border-right">評価</th>
             </tr>
           </thead>
-          <% @user.favorites.each do |favorite| %>
+          <% @user.products.each do |product| %>
             <tbody>
               <tr>
-                <td class="border-left"><%= link_to "#{favorite.product.name}", product_path(favorite.product),data: {"turbolinks"=>false} %></td>
-                <td><%= link_to "#{favorite.product.category.name}", product_path,data: {"turbolinks"=>false} %></td>
-                <td class="border-right"><%= link_to "#{favorite.product.rate}", product_path(favorite.product),data: {"turbolinks"=>false} %></td>
+                <td class="border-left"><%= link_to "#{product.name}", product_path(product),data: {"turbolinks"=>false} %></td>
+                <td><%= link_to "#{product.category.name}", product_path,data: {"turbolinks"=>false} %></td>
+                <td class="border-right"><%= link_to "#{product.rate}", product_path(product),data: {"turbolinks"=>false} %></td>
               </tr>
             </tbody>
             <% end %>
