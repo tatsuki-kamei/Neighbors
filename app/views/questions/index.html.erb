@@ -6,10 +6,8 @@
 </div><!-- /.jumbotron -->
 <div class="container">
 	<div class= "row">
+		<% if user_signed_in? %>
 		<div class="col-md-8 flex_box">
-			<div class="contain_menu">
-				<%= link_to "評価ランキング", question_rank_path, class: 'btn btn-danger' %>
-			</div>
 			<div class="contain_menu">
 				<%= link_to "新規作成",new_question_path, class: 'btn btn-danger' %>
 			</div>
@@ -18,6 +16,7 @@
 			<div class="category_menu">
 			</div>
 		</div>
+		<% end %>
 	</div>
 	<div class="row">
 		<% @questions.each do |question| %>
