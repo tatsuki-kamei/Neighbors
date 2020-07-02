@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
   def show
   	@product = Product.find(params[:id])
-    @average = @product.comments.all.average(:score).round(1)
+    @average = @product.comments.all.average(:score)
     @comment = Comment.new
   end
 

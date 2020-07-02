@@ -9,7 +9,8 @@ class CommentsController < ApplicationController
     #comment.product_id = product.id
     user_comment = Comment.find_by(user_id: current_user.id, product_id: @product.id)
     if  user_comment.present?
-      user_comment.update(title: comment.title, messege: comment.messege, rate: rate)
+      score = Language.get_data(comment_params[:messege])
+      user_comment.update(title: comment.title, messege: comment.messege, rate: rate, score: score)
     else
       comment.product_id = @product.id
       comment.rate = rate
