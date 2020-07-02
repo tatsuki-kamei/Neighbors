@@ -13,6 +13,7 @@ class CommentsController < ApplicationController
     else
       comment.product_id = @product.id
       comment.rate = rate
+      comment.score = Language.get_data(comment_params[:messege])
       comment.save(comment_params)
       @product.create_notification_comment!(current_user, comment.id)
     end

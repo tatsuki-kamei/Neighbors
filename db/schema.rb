@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_023055) do
+ActiveRecord::Schema.define(version: 2020_07_02_060317) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_023055) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.float "rate"
+    t.decimal "score", precision: 5, scale: 3, default: "0.0"
     t.index ["product_id"], name: "index_comments_on_product_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end

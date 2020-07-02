@@ -4,7 +4,6 @@ class ProductsController < ApplicationController
 
   def rank
     @products = Product.find(Product.group(:id).order('rate desc').limit(3).pluck(:id))
-    @rank == 0
     @product = Product.new
     @parents = Category.where(ancestry: nil)
     @hashtags = Hashtag.all
@@ -13,6 +12,7 @@ class ProductsController < ApplicationController
 
   def show
   	@product = Product.find(params[:id])
+    @average = @product.comments.all.average(:score).round(1)
     @comment = Comment.new
   end
 
