@@ -24,8 +24,10 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
-    @product = comment.product
-    comment.destroy
+    if current_user == comment.user
+      @product = comment.product
+      comment.destroy
+    end
     redirect_to product_path(@product)
   end
 
