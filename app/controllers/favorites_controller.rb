@@ -15,10 +15,9 @@ class FavoritesController < ApplicationController
 
 	def destroy
 	    @product = Favorite.find(params[:id]).product
+	    favorite = Favorite.find(params[:id])
 	    if @product.like?(current_user)
-	    	notification = Notification.find_by(visitor_id: current_user.id, visited_id: @product.user_id, product_id: @product.id, action: "favorite")
-	    	notification.destroy
-	      @product.unlike(current_user)
+	    	favorite.destroy
 	      @product.reload
 	      respond_to do |format|
 	        format.html { redirect_to request.referrer || root_url }
