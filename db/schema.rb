@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_060317) do
+ActiveRecord::Schema.define(version: 2020_08_06_062322) do
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id", null: false
@@ -112,7 +112,9 @@ ActiveRecord::Schema.define(version: 2020_07_02_060317) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "favorite_id"
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["favorite_id"], name: "index_notifications_on_favorite_id"
     t.index ["product_id"], name: "index_notifications_on_product_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
