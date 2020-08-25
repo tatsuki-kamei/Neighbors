@@ -35,6 +35,9 @@ class ProductsController < ApplicationController
 
   def edit
   	@product = Product.find(params[:id])
+    if @product.user != current_user
+      render 'show'
+    end
   end
 
   def new
@@ -57,6 +60,9 @@ class ProductsController < ApplicationController
 
   def destroy
   	@product = Product.find(params[:id])
+    if @product.user != current_user
+      render 'index'
+    end
   	@product.destroy
   	redirect_to products_path, notice: "successfully delete product!"
   end
