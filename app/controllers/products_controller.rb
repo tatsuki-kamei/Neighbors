@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   end
 
   def index
-  	@products = Product.all.order(created_at: :desc).page(params[:page]).per(6) #一覧表示するためにproductモデルの情報を全てくださいのall
+  	@products = Product.all.order(created_at: :desc).page(params[:page]) #一覧表示するためにproductモデルの情報を全てくださいのall
     @product = Product.new
     @parents = Category.where(ancestry: nil)
     @hashtags = Hashtag.all
@@ -35,6 +35,7 @@ class ProductsController < ApplicationController
 
   def edit
   	@product = Product.find(params[:id])
+    @categories = Category.where(ancestry: nil)
     if @product.user != current_user
       render 'show'
     end

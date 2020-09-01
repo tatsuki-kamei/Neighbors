@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 	before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
 	def index
-		@questions = Question.all.order(created_at: :desc).page(params[:page]).per(6)
+		@questions = Question.all.order(created_at: :desc).page(params[:page])
 	end
 
 	def rank
