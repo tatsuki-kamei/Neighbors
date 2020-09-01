@@ -25,6 +25,15 @@
 
 			<div style="padding-bottom:10px;">
 				<div style="padding-right:50px;">
+					<%= f.label :category%>
+				</div>
+				<div>
+					<%= f.collection_select :category_id, @categories, :id, :name, :prompt => "--選択して下さい--"  %>
+				</div>
+			</div>
+
+			<div style="padding-bottom:10px;">
+				<div style="padding-right:50px;">
 					<%= f.label :text %>
 				</div>
 				<div>
