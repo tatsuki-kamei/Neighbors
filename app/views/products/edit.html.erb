@@ -28,7 +28,7 @@
 					<%= f.label :category%>
 				</div>
 				<div>
-					<%= f.collection_select :category_id, @categories, :id, :name, :prompt => "--選択して下さい--"  %>
+					<%= f.collection_select :category_id, @categories, :id, :name  %>
 				</div>
 			</div>
 

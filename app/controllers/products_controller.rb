@@ -50,7 +50,6 @@ class ProductsController < ApplicationController
 
   def update
   	@product = Product.find(params[:id])
-    @categories = Category.where(ancestry: nil)
   	if @product.update(product_params)
   		redirect_to product_path(@product), notice: "successfully updated product!"
   	else #if文でエラー発生時と正常時のリンク先を枝分かれにしている。
