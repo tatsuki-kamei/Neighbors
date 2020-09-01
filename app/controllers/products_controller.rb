@@ -25,6 +25,7 @@ class ProductsController < ApplicationController
 
   def create
   	@product = current_user.products.new(product_params) #productモデルのテーブルを使用しているのでproductコントローラで保存する。
+    @categories = Category.where(ancestry: nil)
     if @product.save #入力されたデータをdbに保存する。
       redirect_to product_path(@product), notice: "successfully created product!"#保存された場合の移動先を指定。
   	else
@@ -50,6 +51,7 @@ class ProductsController < ApplicationController
 
   def update
   	@product = Product.find(params[:id])
+    @categories = Category.where(ancestry: nil)
   	if @product.update(product_params)
   		redirect_to product_path(@product), notice: "successfully updated product!"
   	else #if文でエラー発生時と正常時のリンク先を枝分かれにしている。
